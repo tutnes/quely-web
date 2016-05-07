@@ -1,0 +1,54 @@
+{#
+# Copyright 2015 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Visitor</h3>
+
+<div class="btn-group">
+  <a href="/visitors/{{visitor.id}}/edit" class="btn btn-primary btn-sm">
+    <i class="glyphicon glyphicon-edit"></i>
+    Edit visitor
+  </a>
+  <a href="/visitors/{{visitor.id}}/delete" class="btn btn-danger btn-sm">
+    <i class="glyphicon glyphicon-trash"></i>
+    Delete visitor
+  </a>
+</div>
+
+<div class="media">
+  <div class="media-left">
+    {% if visitor.imageUrl %}
+      <img class="visitor-image" src="{{visitor.imageUrl}}">
+    {% endif %}
+  </div>
+  <div class="media-body">
+    <h4 class="visitor-title">
+      {{visitor.get('name')|default('Anonymous', True)}} Using a {{visitor.producer}} / {{visitor.prod_comment}}
+      <small>Last seen: {{visitor.timestamp}}</small>
+    </h4>
+     <br/>
+     With a MAC Address: {{visitor.source}} <br/>
+       <small class="visitor-added-by">Added by {{visitor.get('createdBy')|default('Added by Quely sensor', True)}}</small>
+     
+     
+    
+  </div>
+</div>
+
+{% endblock %}

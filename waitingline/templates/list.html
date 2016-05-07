@@ -1,0 +1,57 @@
+{#
+# Copyright 2015 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Visitors</h3>
+<a href="/visitors/add" class="btn btn-success btn-sm">
+  <i class="glyphicon glyphicon-plus"></i>
+  Add yourself
+</a>
+<table style="width: 100%">
+  <thead>
+    <td><a href="?sortby=name">Name</a></td>
+    <td><a href="?sortby=producer">Device</a></td> 
+    <td><a href="?sortby=source">MAC Address</td>
+    <td><a href="?sortby=dBm_AntSignal">Signal strength (dBm)</td>
+    <td><a href="?sortby=timestamp">Last seen (UTC)</td>
+
+</thead>
+{% for visitor in visitors %}
+  <tr>
+    <td><a href="/visitors/{{visitor.id}}">{{visitor.get('name')|default('Anonymous', True)}}</a></td>
+    <td>{{visitor.producer}}</td> 
+    <td>{{visitor.source}}</td>
+    <td>{{visitor.dBm_AntSignal}}</td>
+     <td>{{visitor.timestamp}}</td>
+  </tr>
+
+{% else %}
+<p>No visitors found</p>
+{% endfor %}
+</table>
+
+{% if next_page_token %}
+<nav>
+  <ul class="pager">
+    <li><a href="?page_token={{next_page_token}}">More</a></li>
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}
