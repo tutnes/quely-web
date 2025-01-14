@@ -1,4 +1,4 @@
-Flask==0.10.1
+Flask==2.2.5
 gcloud==0.12.0
 gunicorn==22.0.0
 oauth2client==2.0.1
